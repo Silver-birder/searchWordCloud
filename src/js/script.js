@@ -1,3 +1,6 @@
-import hello from "./content/script";
+import browser from "./content/script";
 
-hello();
+const keyword = browser.get_keyword()
+if (keyword !== '') {
+    // browser.save(keyword);
+}
