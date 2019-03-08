@@ -16,14 +16,14 @@ let browser = {
     },
     get: function (key) {
         return new Promise((resolve) => {
-            chrome.storage.local.get(key, (item) => {
+            chrome.storage.sync.get(key, (item) => {
                 key ? resolve(item[key]) : resolve(item)
             });
         })
     },
     set: function (obj) {
         return new Promise((resolve) => {
-            chrome.storage.local.set(obj, () => resolve())
+            chrome.storage.sync.set(obj, () => resolve())
         })
     }
 }

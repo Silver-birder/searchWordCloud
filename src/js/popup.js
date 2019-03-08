@@ -1,37 +1,33 @@
-var DATA_FILE_PATH = './popup/words.json'; // 読み込みデータファイル
-var TARGET_ELEMENT_ID = '#cloud'; // 描画先
+import * as d3 from "d3";
+import cloud from "d3-cloud"
+import browser from "./content/script"
 
-d3.json(DATA_FILE_PATH).then(function(data) { // v5
-    var h = 490;
-    var w = 600;
+const TARGET_ELEMENT_ID = '#cloud';
 
-    var random = d3.randomIrwinHall(2);
-    var countMax = d3.max(data, function(d){ return d.count} );
-    var sizeScale = d3.scaleLinear().domain([0, countMax]).range([10, 100])
+browser.get("www.google.com").then(keywords => {
+    keywords = keywords
+        .map(function(d) {
+            return {text: d, size: 10 + Math.random() * 90};
+        });
 
-    var words = data.map(function(d) {
-        return {
-            text: d.word,
-            size: sizeScale(d.count) //頻出カウントを文字サイズに反映
-        };
-    });
-
-    d3.layout.cloud().size([w, h])
-        .words(words)
-        .rotate(function() { return (~~(Math.random() * 6) - 3) * 30; })
+    cloud().size([200, 200])
+        .words(keywords)
+        .padding(5)
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .font("Impact")
         .fontSize(function(d) { return d.size; })
-        .on("end", draw) //描画関数の読み込み
+        .on("end", draw)
         .start();
 
-    // wordcloud 描画
     function draw(words) {
+        const w = 200;
+        const h = 200;
         d3.select(TARGET_ELEMENT_ID)
             .append("svg")
-            .attr("class", "ui fluid image") // style using semantic ui
-            .attr("viewBox", "0 0 " + w + " " + h )  // ViewBox : x, y, width, height
-            .attr("width", "100%")    // 表示サイズの設定
-            .attr("height", "100%")   // 表示サイズの設定
+            .attr("class", "ui fluid image")
+            .attr("viewBox", "0 0 " + w + " " + h )
+            .attr("width", "100%")
+            .attr("height", "100%")
             .append("g")
             .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")")
             .selectAll("text")
@@ -46,4 +42,4 @@ d3.json(DATA_FILE_PATH).then(function(data) { // v5
             })
             .text(function(d) { return d.text; });
     }
-});
+})
