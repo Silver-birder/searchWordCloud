@@ -2,4 +2,4 @@
 
 ## Output
 
-![output](https://res.cloudinary.com/silverbirder/image/upload/v1552223367/word-cloud-chrome-extension/word-cloud-chrome-extension.gif)
+![output](https://res.cloudinary.com/silverbirder/image/upload/v1552224172/word-cloud-chrome-extension/word-cloud-chrome-extension.gif)
