@@ -5,7 +5,7 @@ import cloud from "d3-cloud"
 
 export　let wordCloud = {
     calc_weight_keywords: function(keywords) {
-        return [...new Set(keywords)].map(keyword => {
+        const unique_keywords = [...new Set(keywords)].map(keyword => {
             return {
                 text: keyword,
                 size: keywords.filter(value => {
@@ -13,11 +13,19 @@ export　let wordCloud = {
                 }).length
             }
         });
+        const countMax = d3.max(unique_keywords, function(d){ return d.size} );
+        const sizeScale = d3.scaleLinear().domain([0, countMax]).range([10, 100]);
+        return unique_keywords.map(keyword => {
+            return {
+                text: keyword.text,
+                size: sizeScale(keyword.size),
+            }
+        })
     },
     start: function(keywords, selector) {
-        function draw(words, selector) {
-            const w = 200;
-            const h = 200;
+        const w = 600;
+        const h = 600;
+        function draw(words) {
             d3.select(selector)
                 .append("svg")
                 .attr("class", "ui fluid image")
@@ -39,13 +47,13 @@ export　let wordCloud = {
                 .text(function(d) { return d.text; });
         }
 
-        cloud().size([200, 200])
+        cloud().size([w, h])
             .words(keywords)
             .padding(5)
             .rotate(function() { return ~~(Math.random() * 2) * 90; })
             .font("Impact")
             .fontSize(function(d) { return d.size; })
-            .on("end", draw(keywords, selector))
+            .on("end", draw)
             .start();
 
     },

@@ -1,11 +1,11 @@
 import {storage, browser} from "./content/script";
 
 async function update_storage_keyword(keyword) {
-    let keywords = await storage.get(location.host)
-    if (!keywords) {
-        keywords = []
+    let storage_keywords = await storage.get(location.host)
+    if (!storage_keywords) {
+        storage_keywords = []
     }
-    keywords.push(keyword)
+    const keywords = storage_keywords.concat(keyword)
     const obj = {
         [location.host]: keywords
     }

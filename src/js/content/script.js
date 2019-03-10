@@ -18,7 +18,13 @@ export　let storage = {
 export　let browser = {
     　search_keyword: function() {
          const url = location.href;
-         const have_keyword = url.match(/[?&]q=([^&]+)/);
-         return have_keyword !== null ? have_keyword[1] : ''
+         const match_keyword = url.match(/[?&]q=([^&]+)/);
+         if (match_keyword === null) { return ''; }
+         const keyword = match_keyword[1]
+         const split_keywords = keyword.split('+') // for google search multi keywords
+         const decode_keywords = split_keywords.map(value => {
+             return decodeURIComponent(value)
+         })
+         return decode_keywords
      }
 };
