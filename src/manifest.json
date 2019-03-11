@@ -1,9 +1,6 @@
 {
-  "name": "googleWordCloudStreaming",
+  "name": "word-cloud-chrome-extension",
   "options_page": "options.html",
-  "background": {
-    "page": "background.html"
-  },
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
@@ -24,7 +21,7 @@
     "128": "icon-128.png"
   },
   "permissions": [
-  "storage"
+    "storage"
   ],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
