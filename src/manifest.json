@@ -8,11 +8,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.google.co.jp/*",
-        "https://www.google.com/*",
-        "https://mail.google.com/*",
-        "https://www.youtube.com/*",
-        "https://drive.google.com/*"
+        "https://www.google.com/*"
       ],
       "js": ["script.bundle.js"]
     }

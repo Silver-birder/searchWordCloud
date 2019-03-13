@@ -1,3 +1,5 @@
+import "../css/popup.css";
+
 import {wordCloud} from "./popup/popup";
 import {storage} from "./content/script";
 

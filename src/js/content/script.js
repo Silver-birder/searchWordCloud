@@ -1,6 +1,6 @@
 "use strict";
 
-export　let storage = {
+export　const storage = {
     get: function (key) {
         return new Promise((resolve) => {
             chrome.storage.sync.get(key, (item) => {
@@ -12,10 +12,18 @@ export　let storage = {
         return new Promise((resolve) => {
             chrome.storage.sync.set(obj, () => resolve())
         })
+    },
+    clear: function() {
+        if(window.confirm('検索したキーワードをストレージからクリアしてもよろしいですか？')) {
+            chrome.storage.sync.clear()
+            alert('検索したキーワードをストレージからクリアしました')
+        } else {
+            alert('キャンセルされました')
+        }
     }
 };
 
-export　let browser = {
+export　const browser = {
     　search_keyword: function() {
          const url = location.href;
          const match_keyword = url.match(/[?&]q=([^&]+)/);

@@ -3,7 +3,7 @@
 import * as d3 from "d3";
 import cloud from "d3-cloud"
 
-export　let wordCloud = {
+export　const wordCloud = {
     calc_weight_keywords: function(keywords) {
         const unique_keywords = [...new Set(keywords)].map(keyword => {
             return {
@@ -13,8 +13,6 @@ export　let wordCloud = {
                 }).length
             }
         });
-        console.log(keywords)
-        console.log(unique_keywords)
         const countMax = d3.max(unique_keywords, function(d){ return d.size} );
         const sizeScale = d3.scaleLinear().domain([0, countMax]).range([10, 100]);
         return unique_keywords.map(keyword => {
