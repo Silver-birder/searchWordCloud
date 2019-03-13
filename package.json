@@ -1,7 +1,7 @@
 {
-  "name": "googleWordCloudStreaming",
+  "name": "searchWordCloud",
   "version": "0.0.1",
-  "description": "googleWordCloudStreaming",
+  "description": "searchWordCloud",
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js"
