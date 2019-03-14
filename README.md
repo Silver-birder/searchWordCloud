@@ -1,4 +1,4 @@
-## word-cloud-chrome-extension
+## searchWordCloud
 
 ## Output
 
